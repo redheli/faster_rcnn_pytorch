@@ -45,6 +45,8 @@ def test():
         w = det[2] - det[0]
         h = det[3] - det[1]
         rect = patches.Rectangle(det[0:2], w, h, linewidth=1, edgecolor='r', facecolor='none')
+        # text
+        plt.text(det[0], det[1], '%s: %.3f' % (classes[i], scores[i]))
 
         # Add the patch to the Axes
         ax.add_patch(rect)
