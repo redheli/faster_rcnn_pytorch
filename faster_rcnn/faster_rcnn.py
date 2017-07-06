@@ -38,6 +38,7 @@ class RPN(nn.Module):
 
         self.features = VGG16(bn=False)
         self.conv1 = Conv2d(512, 512, 3, same_padding=True)
+        # each anchor scale has 3 ratio
         self.score_conv = Conv2d(512, len(self.anchor_scales) * 3 * 2, 1, relu=False, same_padding=False)
         self.bbox_conv = Conv2d(512, len(self.anchor_scales) * 3 * 4, 1, relu=False, same_padding=False)
 
@@ -52,7 +53,7 @@ class RPN(nn.Module):
     def forward(self, im_data, im_info, gt_boxes=None, gt_ishard=None, dontcare_areas=None):
         im_data = network.np_to_variable(im_data, is_cuda=True)
         im_data = im_data.permute(0, 3, 1, 2)
-        features = self.features(im_data)
+        features = self.features(im_data)  # VGG base model
 
         rpn_conv1 = self.conv1(features)
 
