@@ -33,13 +33,14 @@ def log_print(text, color=None, on_color=None, attrs=None):
 
 # hyper-parameters
 # ------------
-imdb_name = 'voc_2007_trainval'
+# imdb_name = 'voc_2007_trainval'
+imdb_name = 'voc_2007_max2'
 cfg_file = 'experiments/cfgs/faster_rcnn_end2end.yml'
 pretrained_model = 'data/pretrained_model/VGG_imagenet.npy'
-output_dir = 'models/saved_model3'
+output_dir = 'models/saved_model_max2'
 
 start_step = 0
-end_step = 100000
+end_step = 2000 #100000
 lr_decay_steps = {60000, 80000}
 lr_decay = 1./10
 
@@ -170,6 +171,11 @@ for step in range(start_step, end_step+1):
         save_name = os.path.join(output_dir, 'faster_rcnn_{}.h5'.format(step))
         network.save_net(save_name, net)
         print('save model: {}'.format(save_name))
+    if step >= end_step:
+        save_name = os.path.join(output_dir, 'faster_rcnn_{}.h5'.format(step))
+        network.save_net(save_name, net)
+        print('save final model: {}'.format(save_name))
+
     if step in lr_decay_steps:
         lr *= lr_decay
         optimizer = torch.optim.SGD(params[8:], lr=lr, momentum=momentum, weight_decay=weight_decay)
