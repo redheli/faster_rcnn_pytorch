@@ -9,15 +9,17 @@ import matplotlib.patches as patches
 
 def test():
     import os
-    im_file = 'demo/004545.jpg'
+    # im_file = 'demo/004545.jpg'
+    # im_file = 'data/WEIQIdevkit2017/WEIQI2017/JPEGImages/000004.jpg'
     # im_file = 'data/VOCdevkit2007/VOC2007/JPEGImages/009036.jpg'
     # im_file = '/media/longc/Data/data/2DMOT2015/test/ETH-Crossing/img1/000100.jpg'
+    im_file = './IMG_2030.jpg'
     image = cv2.imread(im_file)
 
     # model_file = './VGGnet_fast_rcnn_iter_70000.h5'
     # model_file = '/media/longc/Data/models/faster_rcnn_pytorch3/faster_rcnn_100000.h5'
     # model_file = '/media/longc/Data/models/faster_rcnn_pytorch2/faster_rcnn_2000.h5'
-    model_file = './models/saved_model_max/faster_rcnn_100000.h5'
+    model_file = './models/saved_model_max2/faster_rcnn_2000.h5'
     detector = FasterRCNN()
     network.load_net(model_file, detector)
     detector.cuda()

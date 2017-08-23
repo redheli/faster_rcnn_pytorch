@@ -172,13 +172,9 @@ class RPN(nn.Module):
 
 
 class FasterRCNN(nn.Module):
-    n_classes = 21
+    n_classes = 3
     classes = np.asarray(['__background__',
-                       'aeroplane', 'bicycle', 'bird', 'boat',
-                       'bottle', 'bus', 'car', 'cat', 'chair',
-                       'cow', 'diningtable', 'dog', 'horse',
-                       'motorbike', 'person', 'pottedplant',
-                       'sheep', 'sofa', 'train', 'tvmonitor'])
+                       'whitego', 'blackgo'])
     PIXEL_MEANS = np.array([[[102.9801, 115.9465, 122.7717]]])
     SCALES = (600,)
     MAX_SIZE = 1000

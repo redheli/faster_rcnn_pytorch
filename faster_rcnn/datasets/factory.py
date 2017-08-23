@@ -18,6 +18,7 @@ from .kitti_tracking import kitti_tracking
 from .nthu import nthu
 from .coco import coco
 from .kittivoc import kittivoc
+from .weiqi_handler import weiqi_handler
 
 
 def _selective_search_IJCV_top_k(split, year, top_k):
@@ -29,6 +30,11 @@ def _selective_search_IJCV_top_k(split, year, top_k):
     imdb.config['top_k'] = top_k
     return imdb
 
+# add weiqi handler
+for split in ['train', 'test']:
+    name = 'weiqi_2017_{}'.format(split)
+    __sets[name] = (lambda split=split, year='2017':
+                    weiqi_handler(split, year))
 
 # Set up voc_<year>_<split> using selective search "fast" mode
 for year in ['2007', '2012', '0712']:
